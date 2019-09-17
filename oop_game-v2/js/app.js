@@ -12,17 +12,12 @@ startButton.addEventListener('click', function () {
 })
 
 for (let key of keyBoardKeys) {
-    key.addEventListener('click', function () {
-        game.handleInteraction(key);
-    })
+    key.addEventListener('click', function (event) {
+        game.handleInteraction(event, key, null);
+    });
 }
-
-
-document.onkeypress = function (evt) {
-    evt = evt || window.event;
-    const charCode = evt.keyCode || evt.which;
-    const charStr = String.fromCharCode(charCode);
-    console.log(charStr);
-    game.handleKeyBoardInteraction(charStr, keyBoardKeys)
-
-};
+document.addEventListener('keydown', function (e) {
+    const charCode = event.keyCode;
+    const charStr = String.fromCharCode(charCode).toLowerCase();
+    game.handleInteraction(event, keyBoardKeys, charStr)
+})

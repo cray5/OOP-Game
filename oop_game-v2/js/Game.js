@@ -72,8 +72,6 @@ class Game {
         }
     }
 
-    // allListItems.length === correctAnswers.length && hiddenItems.length === allListItems.length
-
     /**
      * Increases the value of the missed property
      * Removes a life from the scoreboard
@@ -100,61 +98,60 @@ class Game {
         overlay.style.display = 'flex';
         if (gameWon === true) {
             resultMessage.textContent = 'Great Job!!!';
-            // overlay.classList.remove('start');
+            overlay.classList.remove('lose');
             overlay.classList.add('win');
         } else {
             resultMessage.textContent = 'Sorry, Better Luck Next Time';
-            // overlay.classList.remove('start');
+            overlay.classList.remove('win');
             overlay.classList.add('lose');
         }
     };
 
 
-    /**
-     * Handles onscreen keyboard button clicks
-     * @param (HTMLButtonElement) button - The clicked button element
+    /** Handles onscreen keyboard button clicks and computer's keyboard keydown
+     * @param (event, button, letter) event {event Object}, button { html element } - The clicked button element, letter {string} - The letter pressed on the keyboard
      */
-    handleClickInteraction(button) {
-        button.disabled = true;
+    handleInteraction(event, button, letter) {
         const phrase = new Phrase(this.activePhrase.phrase);
-        if (phrase.checkLetter(button.textContent) === false) {
-            button.classList.add('wrong');
-            this.removeLife();
-        } else {
-            button.classList.add('chosen');
-            phrase.showMatchedLetter(button.textContent);
-            if (this.checkForWin()) {
-                this.gameOver(true);
-                this.reset();
+        if (event.type === 'click') {
+            button.disabled = true;
+            if (phrase.checkLetter(button.textContent) === false) {
+                button.classList.add('wrong');
+                this.removeLife();
+            } else {
+                button.classList.add('chosen');
+                phrase.showMatchedLetter(button.textContent);
+                if (this.checkForWin()) {
+                    this.gameOver(true);
+                    this.reset();
+                }
             }
-        }
-    };
-
-    /**
-     * Handles onscreen keyboard button keydown
-     * @param 
-     * (string) letter - The letter key pressed on the keyboard
-     * (HTMLButtonElement) keys - The onscreen button elements
-     */
-    handleKeyBoardInteraction(letter, keys) {
-        const phrase = new Phrase(this.activePhrase.phrase);
-        for (let key of keys) {
-            if (key.textContent === letter) {
-                key.disabled = true;
-                if (phrase.checkLetter(letter) === false) {
-                    key.classList.add('wrong');
-                    this.removeLife();
-                } else {
-                    key.classList.add('chosen');
-                    phrase.showMatchedLetter(letter);
-                    if (this.checkForWin()) {
-                        this.gameOver(true);
-                        this.reset();
+        } else if (event.type === 'keydown') {
+            for (let key of button) {
+                if (key.textContent === letter) {
+                    key.disabled = true;
+                    key.classList.add('once');
+                    if (phrase.checkLetter(letter) === false) {
+                        key.classList.add('wrong');
+                        key.classList.remove('once');
+                        if (key.classList.contains('wrong') && key.disabled === true && key.classList.contains('once') === false) {
+                            if (key.classList.contains('final') === false) {
+                                this.removeLife();
+                                key.classList.add('final');
+                            }
+                        }
+                    } else {
+                        key.classList.add('chosen');
+                        phrase.showMatchedLetter(key.textContent);
+                        if (this.checkForWin()) {
+                            this.gameOver(true);
+                            this.reset();
+                        }
                     }
                 }
-
             }
         }
+
     };
 
     /**
@@ -172,6 +169,7 @@ class Game {
                 Heart[i].src = "images/liveHeart.png";
                 Heart[i].alt = "Heart Icon";
             }
+
             while (phraseDisplayDiv.firstChild) {
                 phraseDisplayDiv.removeChild(phraseDisplayDiv.firstChild);
             }
@@ -184,5 +182,4 @@ class Game {
 
         }
     }
-
-}
+};
