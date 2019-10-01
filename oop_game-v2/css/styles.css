@@ -1,14 +1,14 @@
 /* Main styles */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&Roboto:300');
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
 
 /* Variables */
 
 :root {
-  --color-win: #78CF82;
-  --color-lose: #D94545;
-  --color-start: #5b85b7;
-  --color-neutral: #445069;
-  --color-neutral-light: #D2D2D2;
+  --color-win: #AFD275;
+  --color-lose: #e7717d;
+  --color-start: #7e685a;
+  --color-neutral: #C2B9B0;
+  --color-neutral-light: #ffffff;
   --color-keys: #37474F;
   --color-keys-light: #E5E5E5;
   --font-size-large: 60px;
@@ -20,7 +20,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Playfair Display', serif;
 }
 
 body {
@@ -28,9 +28,15 @@ body {
   flex-direction: column;
   display: flex;
   height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-li, ol, ul {
+li,
+ol,
+ul {
   padding: 0;
   display: inline-block;
 }
@@ -40,6 +46,9 @@ h2 {
   text-transform: uppercase;
   font-size: var(--font-size-large);
   margin: 0;
+  background: linear-gradient(to right, #e04050 40%, #40E096 60%, #faed26 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 h1 {
@@ -47,23 +56,54 @@ h1 {
 }
 
 button {
-  margin: 6px;
+  margin: 0.2vmax;
   border: 1px solid transparent;
+  width: 5rem;
+  height: 5rem;
   padding: .5rem 1rem;
   color: var(--color-keys);
   font-size: var(--font-size-medium);
-  background-color: var(--color-keys-light);
-  border-radius: 5px;
+  background: #1b1b1b;
+  color: #bdc3c7;
+  border-radius: 10%;
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
   transition: var(--transition);
   cursor: pointer;
+  overflow: hidden;
+}
+
+button:hover {
+  font-size: 1.35em;
+  background-position: right center;
+}
+
+button:focus {
+  font-size: 1.5em;
+  background-position: right center;
+}
+
+#btn__reset:hover {
+  color: #9050AA;
+  border-color: #FBDC45;
+  background-color: white;
+}
+
+#btn__reset:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.5),
+    0 0 0 1.5px rgba(255, 105, 180, 0.5);
 }
 
 #btn__reset {
-	width: 200px;
-	margin: 0 auto;
+  background-image: linear-gradient(to right, #ffe779 0%, #f6d365 51%, #fda085 100%);
+  color: #9050AA;
+  border-radius: 5px;
+  width: 200px;
+  margin: 0 auto;
 }
+
+
 
 .main-container {
   display: flex;
@@ -72,6 +112,7 @@ button {
   height: 100%;
   max-height: 900px;
   text-align: center;
+  background: linear-gradient(110deg, #ffbe76 40%, rgba(0, 0, 0, 0) 30%), radial-gradient(farthest-corner at 0% 0%, #ff7979 70%, #badc58 70%);
 }
 
 .section {
@@ -79,8 +120,8 @@ button {
   padding: 10px;
 }
 
-#phrase ul li{
-  margin-top: 15px;
+#phrase ul li {
+  margin-top: 0.5vmax;
 }
 
 /* Title */
@@ -93,11 +134,11 @@ button {
 /* Phrase */
 
 .letter {
-  font-size: var(--font-size-medium);
-  height: 65px;
-  width: 65px;
-  padding: 20px 1px 0 1px;
-  margin-right: 2px;
+  font-size: 1vmax;
+  height: 10vmin;
+  width: 10vmin;
+  padding: 0.5vmim 0.5vmin 0.5vmin 0.5vmin;
+  margin-right: 0.5vmin;
   color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
@@ -113,8 +154,8 @@ button {
   color: #fff;
   background-color: #4ac0d5;
   font-size: 20px;
-  height: 65px;
-  width: 65px;
+  height: 4.1em;
+  width: 4.1em;
   padding: 20px 1px 0 1px;
   margin-right: 2px;
   border-radius: 5px;
@@ -131,16 +172,17 @@ button {
 }
 
 .chosen {
-  background: #3a3f58;
+  background: #54CF8D;
   border-radius: 5px;
   font-size: var(--font-size-medium);
   color: #FFFFFF;
 }
 
 .wrong {
-  background: #f7a964;
+  background: #e74c3c;
   color: #FFFFFF;
 }
+
 
 .btn__reset {
   padding: 16px;
@@ -166,7 +208,8 @@ button {
   display: flex;
   flex-direction: column;
   position: fixed;
-  color: #FFFFFF;
+  color: #ffffff;
+  font-weight: bold;
   justify-content: center;
   top: 0;
   bottom: 0;
@@ -176,19 +219,27 @@ button {
 }
 
 .title {
-  color: #FFF;
+  background: linear-gradient(to right, #e04050 40%, #40e0d0 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bolder;
 }
 
 .start {
-  background-color: #3a3f58;
+  background: linear-gradient(70deg, #fff810 30%, rgba(0, 0, 0, 0) 30%), linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
 }
 
 .start a {
   color: #fff;
 }
 
+img {
+  width: 4rem;
+  height: 4rem;
+}
+
 .win {
-  background-color: var(--color-win);
+  background: #00b894;
 }
 
 .win a {
@@ -196,7 +247,7 @@ button {
 }
 
 .lose {
-  background-color: #f5785f;
+  background: #81ecec;
 }
 
 .lose a {

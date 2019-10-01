@@ -17,7 +17,7 @@ class Game {
         return [
 
             {
-                phrase: 'Good morning Vietnam'
+                phrase: 'Im king of the world'
             },
 
             {
@@ -25,7 +25,7 @@ class Game {
             },
 
             {
-                phrase: 'Huston we have a problem'
+                phrase: 'Houston we have a problem'
             },
 
             {
@@ -47,6 +47,13 @@ class Game {
         let index = Math.floor(Math.random() * this.createPhrases().length);
         return this.phrases[index];
     };
+
+    /**
+     * starts new instance of the play area of the app.
+     * hides the 'start' game overlay.
+     * generates a new Phrase class with the phrase value stored in the selected random phrase object.
+     * assigns the 'assigned random' phrase to the activePhrase parameter of the Game constructor. 
+     */
 
     startGame() {
         document.querySelector('#overlay').style.display = 'none';
@@ -128,14 +135,15 @@ class Game {
             }
         } else if (event.type === 'keydown') {
             for (let key of button) {
-                if (key.textContent === letter) {
-                    key.disabled = true;
-                    key.classList.add('once');
-                    if (phrase.checkLetter(letter) === false) {
-                        key.classList.add('wrong');
-                        key.classList.remove('once');
+                if (key.textContent === letter) { // checking to find the keystroke on the on screen keyboard.
+                    key.disabled = true; // disabling the keyboard key
+                    key.classList.add('once'); // adding the class `once`, to check if the key is pressed once.
+                    if (phrase.checkLetter(letter) === false) { //checking the keystroke letter is in the phrase
+                        key.classList.add('wrong'); // adding the wrong class to the on screen letter key associated with the keystroke
+                        key.classList.remove('once'); // removing the once class. i.e signifying that keystroke cannot happen again.
+                        //if the answer is wrong, and the onsreen key is disabled, and the key does not contain the `once` class
                         if (key.classList.contains('wrong') && key.disabled === true && key.classList.contains('once') === false) {
-                            if (key.classList.contains('final') === false) {
+                            if (key.classList.contains('final') === false) { //to remove life only once, we add a final class after removing life just once.
                                 this.removeLife();
                                 key.classList.add('final');
                             }
@@ -164,6 +172,7 @@ class Game {
         const keyBoardKeys = document.getElementsByClassName('key');
         const phraseDisplayDiv = document.querySelector('#phrase ul');
         const Heart = document.querySelectorAll('.tries img');
+
         if (overlay.classList.contains('win') || overlay.classList.contains('lose')) {
             for (let i = 0; i < Heart.length; i++) {
                 Heart[i].src = "images/liveHeart.png";
@@ -173,6 +182,7 @@ class Game {
             while (phraseDisplayDiv.firstChild) {
                 phraseDisplayDiv.removeChild(phraseDisplayDiv.firstChild);
             }
+
             for (let key of keyBoardKeys) {
                 key.disabled = false;
                 key.classList.remove('wrong', 'chosen');
