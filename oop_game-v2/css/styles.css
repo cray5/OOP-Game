@@ -46,7 +46,7 @@ h2 {
   text-transform: uppercase;
   font-size: var(--font-size-large);
   margin: 0;
-  background: linear-gradient(to right, #e04050 40%, #40E096 60%, #faed26 80%);
+  background: #edcb96;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -112,7 +112,7 @@ button:focus {
   height: 100%;
   max-height: 900px;
   text-align: center;
-  background: linear-gradient(110deg, #ffbe76 40%, rgba(0, 0, 0, 0) 30%), radial-gradient(farthest-corner at 0% 0%, #ff7979 70%, #badc58 70%);
+  background: linear-gradient(110deg, #9e7682 40%, rgba(0, 0, 0, 0) 30%), radial-gradient(farthest-corner at 0% 0%, #605770 70%, #4d4861 70%);
 }
 
 .section {
@@ -219,14 +219,14 @@ button:focus {
 }
 
 .title {
-  background: linear-gradient(to right, #e04050 40%, #40e0d0 70%);
+  background: #edcb96;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bolder;
 }
 
 .start {
-  background: linear-gradient(70deg, #fff810 30%, rgba(0, 0, 0, 0) 30%), linear-gradient(30deg, #63e89e 60%, #ff7ee3 60%);
+  background: linear-gradient(70deg, #9e7682 30%, rgba(0, 0, 0, 0) 30%), linear-gradient(30deg, #605770 60%, #4d4861 60%);
 }
 
 .start a {
